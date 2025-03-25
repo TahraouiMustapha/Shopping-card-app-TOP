@@ -4,6 +4,9 @@
 // https://www.googleapis.com/books/v1/volumes?q=2&startIndex=0&maxResults=10&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI
 // https://www.googleapis.com/books/v1/volumes?q=2&startIndex=0&maxResults=10&filter=paid-ebooks&key=
 
+// to get books with categorie self-help
+// https://www.googleapis.com/books/v1/volumes?q=subject+category...
+
 /*
     get books => books.items (array)
     get title => book.volumeInfo.title
@@ -24,7 +27,7 @@ const useFetchBooks = (numberOfBooks = 30) => {
     useEffect(()=> {
         const fetchImage = async ()=> {
             try {
-                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=2&startIndex=0&maxResults=${numberOfBooks}&country=US&&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI`, {
+                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=a&startIndex=0&maxResults=${numberOfBooks}&country=US&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI`, {
                     mode: "cors"
                 })
 
