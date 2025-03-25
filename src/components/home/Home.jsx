@@ -9,10 +9,12 @@ function Home(){
     console.log(books)
 
     return (
-        <>
-            <div>hi</div>
-        </>
+        <div>
 
+            <div> {/*categories section */}
+                
+            </div>
+        </div>
     )
 }
 
