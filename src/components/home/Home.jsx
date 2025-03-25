@@ -9,7 +9,10 @@ function Home(){
     console.log(books)
 
     return (
-        <div>hi</div>
+        <>
+            <div>hi</div>
+        </>
+
     )
 }
 
