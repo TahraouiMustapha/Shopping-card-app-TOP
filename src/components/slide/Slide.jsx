@@ -1,12 +1,7 @@
 import styles from './Slide.module.css'
 import { useState } from 'react'
+import Card from '../bookCard/Card'
 
-
-function Card({number}) {
-    return (
-        <div> {number} </div>
-    )
-}
 
 const arrayOfObjs = [
   {number:0},
@@ -39,7 +34,7 @@ export default function Slide() {
         <div className={styles.slide}>
             <button onClick={handleLiftClick}>&lt;</button>
             <div className={styles.cardsContainer}>
-                {shownIndex.map((shown)=> <Card number={arrayOfObjs[shown].number}/>)}
+                {shownIndex.map((shown, index)=> <Card key={index} title={arrayOfObjs[shown].number}/>)}
             </div>
             <button onClick={handleRightClick}>&gt;</button>
         </div>

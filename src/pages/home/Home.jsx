@@ -1,5 +1,7 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useFetchBooks } from "../../hooks/useFetchBooks";
+import Slide from "../../components/slide/Slide";
+
 
 const categories = [{id: crypto.randomUUID(), categorieName:'Self-Help'},
                     {id: crypto.randomUUID(), categorieName:'History'},
@@ -24,13 +26,18 @@ function Home(){
     return (
         <div>
 
-            <div> {/*categories section */}
+            <div> {/*cards container of categories section */}
                 {categories.map((categorieObj)=> {
                     return <CategorieCard 
                             key={categorieObj.id}
                             categorieName={categorieObj.categorieName}
                             handleCategorieClick={handleCategorieClick} />
                 })}
+            </div>
+
+            <div> 
+            {/*slide element of trending part*/}
+                <Slide/>
             </div>
         </div>
     )
