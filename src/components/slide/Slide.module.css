@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+}
+
+.slide {
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.cardsContainer > * {
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    margin: 0 10px;
+    color: black;
+}
