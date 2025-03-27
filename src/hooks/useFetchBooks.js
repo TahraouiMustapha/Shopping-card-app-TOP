@@ -7,6 +7,10 @@
 // to get books with categorie self-help
 // https://www.googleapis.com/books/v1/volumes?q=subject+category...
 
+// to get trending books (newest)
+// https://www.googleapis.com/books/v1/volumes?q=trending&orderBy=newest&maxResults=10&key=API_KEY
+
+
 /*
     get books => books.items (array)
     get title => book.volumeInfo.title
@@ -18,14 +22,14 @@
 import { useEffect, useState } from "react"
 
 
-const useFetchBooks = (numberOfBooks = 30) => {
+const useBooks = (numberOfBooks = 30) => {
     const [books, setBooks] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
 
     useEffect(()=> {
-        const fetchImage = async ()=> {
+        const fetchBooks = async ()=> {
             try {
                 const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=a&startIndex=0&maxResults=${numberOfBooks}&country=US&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI`, {
                     mode: "cors"
@@ -43,13 +47,43 @@ const useFetchBooks = (numberOfBooks = 30) => {
             } finally {
                 setLoading(false);
             }
-
         }
-
-        fetchImage()
+        fetchBooks()
     }, [numberOfBooks])
 
     return { books, error, loading };
 }
 
-export { useFetchBooks };
+const useTrendingBooks = ()=> {
+    const [trendingBooks, setTrendingBooks] = useState(null);
+    const [trendingError, setTrendingError] =  useState(null);
+    const [trendingLoading, setTrendingLoading]= useState(true)
+
+    useEffect(()=> {
+        const fetchBooks = async ()=> {
+            try {
+                const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=trending&country=US&filter=paid-ebooks&orderBy=newest&maxResults=10&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI', {
+                    mode: "cors"
+                })
+
+                if(response.status !== 200 || !response.ok) {
+                    throw new Error(`HTTP error: Status ${response.status}`)
+                }
+
+                const myBooks = await response.json();
+                setTrendingBooks(myBooks.items)
+                setTrendingError(null)
+            } catch (err) {
+                setTrendingError(err)
+            } finally {
+                setTrendingLoading(false);
+            }
+        }
+
+        fetchBooks()
+    }, [])
+
+    return { trendingBooks, trendingError, trendingLoading }
+}
+
+export { useBooks, useTrendingBooks };
