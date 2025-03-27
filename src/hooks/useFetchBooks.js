@@ -21,6 +21,17 @@
 
 import { useEffect, useState } from "react"
 
+// to structure data
+function createBook(obj) {
+    return {
+        id: obj.id,
+        title: obj.volumeInfo.title,
+        author: obj.volumeInfo.authors? obj.volumeInfo.authors[0]:null,
+        thumbnail: obj.volumeInfo.imageLinks.smallThumbnail,
+        price: 0
+    }
+}
+
 
 const useBooks = (numberOfBooks = 30) => {
     const [books, setBooks] = useState(null);
@@ -40,8 +51,9 @@ const useBooks = (numberOfBooks = 30) => {
                 }
 
                 const myBooks = await response.json();
-                setBooks(myBooks.items);
-
+                
+                setBooks(myBooks.items.map((item)=> createBook(item)));
+                setError(null)
             } catch(err) {
                 setError(err);
             } finally {
@@ -71,7 +83,7 @@ const useTrendingBooks = ()=> {
                 }
 
                 const myBooks = await response.json();
-                setTrendingBooks(myBooks.items)
+                setTrendingBooks(myBooks.items.map((item)=> createBook(item)))
                 setTrendingError(null)
             } catch (err) {
                 setTrendingError(err)
