@@ -1,5 +1,5 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { useFetchBooks } from "../../hooks/useFetchBooks";
+import { useTrendingBooks } from "../../hooks/useFetchBooks";
 import Slide from "../../components/slide/Slide";
 
 
@@ -10,13 +10,10 @@ const categories = [{id: crypto.randomUUID(), categorieName:'Self-Help'},
                 ];
 
 function Home(){
-    // const {books, error, loading} = useFetchBooks(2)
+    const { trendingBooks, trendingError, trendingLoading } = useTrendingBooks();
     const navigate = useNavigate();
     const { setCategorie } = useOutletContext()
     
-
-    // if(error) return <p>A network error was encountred</p>
-    // if(loading) return <p>Loading ...</p>
 
     function handleCategorieClick(categorieName) {
         setCategorie(categorieName)
@@ -37,7 +34,13 @@ function Home(){
 
             <div> 
             {/*slide element of trending part*/}
-                <Slide/>
+            {trendingError ? (
+                <p>A network error was encountred!</p>    
+            ): trendingLoading ? (
+                <p>Loading ...</p>
+            ): (
+                trendingBooks?.length > 0 && <Slide trendingBooks={trendingBooks}/> 
+            )}
             </div>
         </div>
     )
