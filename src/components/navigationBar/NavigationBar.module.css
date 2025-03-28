@@ -1,8 +1,6 @@
 .navigationBar {
-    --logo-color: #2563EB;
     max-height: 8vh;
     padding: 1.5rem  8%;
-
     display: flex;
     justify-content: space-between;
 }
@@ -46,5 +44,5 @@ a,
 
 a:hover ,
 .navLink p:hover {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--logo-color);
 }

@@ -1,6 +1,7 @@
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, Link } from "react-router-dom";
 import { useTrendingBooks } from "../../hooks/useFetchBooks";
 import Slide from "../../components/slide/Slide";
+import styles from "./Home.module.css"
 
 
 const categories = [{id: crypto.randomUUID(), categorieName:'Self-Help'},
@@ -21,7 +22,14 @@ function Home(){
     }    
 
     return (
-        <div>
+        <div className={styles.content}>
+            <div className={styles.main}>
+                <h1 className={styles.logo}>MYLib</h1>
+                <p className={styles.bio}>Discover Your Next Must-Read Adventure!</p>
+                <Link 
+                to='/shop'
+                className={styles.shopNowBtn}>Shop Now</Link>
+            </div>
 
             <div> {/*cards container of categories section */}
                 {categories.map((categorieObj)=> {
