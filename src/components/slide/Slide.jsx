@@ -1,18 +1,11 @@
 import styles from './Slide.module.css'
 import { useState } from 'react'
 import Card from '../bookCard/Card'
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 
-const arrayOfObjs = [
-  {number:0},
-  {number:1},
-  {number:2},
-  {number:3},
-  {number:4},
-  {number:5}
-]
 
-export default function Slide() {
+export default function Slide({trendingBooks}) {
     const [shownIndex, setShownIndex] = useState([
         0, 1, 2, 3
     ])
@@ -20,23 +13,26 @@ export default function Slide() {
 
     function handleLiftClick() {
         setShownIndex((prevShownIndex) => 
-            prevShownIndex.map((shown)=> shown <= 0? arrayOfObjs.length - 1: shown -= 1 )
+            prevShownIndex.map((shown)=> shown <= 0? trendingBooks.length - 1: shown -= 1 )
         )
     }
 
     function handleRightClick() {
         setShownIndex((prevShownIndex)=> 
-            prevShownIndex.map((shown)=> shown >= arrayOfObjs.length - 1? 0: shown += 1)
+            prevShownIndex.map((shown)=> shown >= trendingBooks.length - 1? 0: shown += 1)
         )
     }
 
     return (
         <div className={styles.slide}>
-            <button onClick={handleLiftClick}>&lt;</button>
+            <ChevronLeft className={styles.arrow}
+            onClick={handleLiftClick} size={32} strokeWidth={1.5}/>
             <div className={styles.cardsContainer}>
-                {shownIndex.map((shown, index)=> <Card key={index} title={arrayOfObjs[shown].number}/>)}
+                <Card book={trendingBooks[0]}/>
+                {/* {shownIndex.map((shown)=> <Card key={trendingBooks[shown].id} book={trendingBooks[shown]}/>)} */}
             </div>
-            <button onClick={handleRightClick}>&gt;</button>
+            <ChevronRight className={styles.arrow}
+            onClick={handleRightClick} size={32} strokeWidth={1.5}/>
         </div>
     )
 }

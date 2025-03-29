@@ -3,23 +3,27 @@
 }
 
 .slide {
-    width: 100vw;
-    height: 200px;
+    width: 100%;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 0 calc(var(--padding-in-content) - 32px);
 }
 
 .cardsContainer {
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    border: 1px solid black;
 }
 
-.cardsContainer > * {
-    border: 1px solid black;
-    height: 50px;
-    width: 50px;
-    margin: 0 10px;
-    color: black;
+.arrow {
+    cursor: pointer;
+}
+
+.arrow:hover {
+    color: #3B82F6;
 }
