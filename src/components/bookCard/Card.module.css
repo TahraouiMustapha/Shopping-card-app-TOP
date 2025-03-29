@@ -1,0 +1,80 @@
+
+* {
+    line-height: 1.5;
+}
+
+.card {
+    --blue-color: #3B82F6;
+    --background-color: #eaebec;
+    height: 480px;
+    flex: 0 0 250px;
+
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    transition: background-color 0.2s;
+}
+
+.card:hover {
+    background-color: #c5c5c5;
+} 
+
+
+.thumbnail {
+    min-height: 60%;
+    background-position: center 60%;
+    background-size: 80% 90%;
+    background-repeat: no-repeat;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    padding:0.4em 1em;
+}
+
+.content div:nth-child(1) {
+    flex-grow: 1;
+}
+
+.card .title {
+    height: 32px;
+    overflow: hidden;             
+    text-overflow: ellipsis; 
+}
+
+.card .title, 
+.card .price  {
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.card .author {
+    font-size: 1.1em;
+    color: #3b3b3b;
+}
+
+.content div:nth-child(2) {
+    justify-self: flex-end;
+    margin-bottom: 12px;
+}
+
+.card .addToCartBtn {
+    width: 100%;
+    padding: 0.4rem 1.2rem;
+
+    margin-top: 8px;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--blue-color);
+    border: 3px solid var(--blue-color);
+    cursor: pointer;
+}
+
+.card .addToCartBtn:hover {
+    background-color: var(--blue-color);
+    color: var(--background-color);
+}

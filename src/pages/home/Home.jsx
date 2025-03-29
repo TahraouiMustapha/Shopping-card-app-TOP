@@ -54,15 +54,20 @@ function Home(){
                 </div>
             </div>
 
-            <div> 
-            {/*slide element of trending part*/}
-            {trendingError ? (
-                <p>A network error was encountred!</p>    
-            ): trendingLoading ? (
-                <p>Loading ...</p>
-            ): (
-                trendingBooks?.length > 0 && <Slide trendingBooks={trendingBooks}/> 
-            )}
+            <div className={styles.trending}> 
+                <div className={styles.head}>
+                    <h1 className={styles.title}>What's Trending</h1>
+                    <Link to='/shop' className={styles.seeMore}>see more</Link>
+                </div>
+
+                {/*slide element of trending part*/}
+                {trendingError ? (
+                    <p>A network error was encountred!</p>    
+                ): trendingLoading ? (
+                    <p>Loading ...</p>
+                ): (
+                    trendingBooks?.length > 0 && <Slide trendingBooks={trendingBooks}/> 
+                )}
             </div>
         </div>
     )
