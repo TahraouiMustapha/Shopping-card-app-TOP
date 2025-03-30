@@ -1,5 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .content {
-    --placeholder-color: #9ca3af;
+    --placeholder-color: #8c939e;
     min-height:100vh;  
     padding: 1rem 8rem;
     display: grid;
@@ -7,8 +12,10 @@
     grid-template-rows: 10vh 1fr;
 }
 
+/* style the search bar  */
 .search {
     grid-column: 1 / span 2;
+    grid-row: 1 / 2;
     justify-self: center;
     align-items: center;
     display: flex;
@@ -36,8 +43,35 @@ input::placeholder {
     border-color:  var(--logo-color);
 }
 
+/* style the main  */
 
+.main {
+    grid-column: 2 / 3;
+    padding: 1rem;
+}
 
+.main .title {
+    margin-bottom: -8px;
+    font-size: 2em;
+}
+
+.main .numberOfresult {
+    font-size: 1.1em;
+    color: var(--placeholder-color);
+    margin-bottom: 24px;
+}
+
+.main .booksContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: 16px;
+    padding-left: 1em;
+}
+
+/* style the side bar */
+.side {
+    grid-row: 2 / 3;
+}
 
 /* just for seeing */
 .content > *:not(.search) {
