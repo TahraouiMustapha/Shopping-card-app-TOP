@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+ul {
+    list-style-type: none;
+}
+
 .content {
     --placeholder-color: #8c939e;
     min-height:100vh;  
@@ -48,6 +52,7 @@ input::placeholder {
 .main {
     grid-column: 2 / 3;
     padding: 1rem;
+    border-left: 3px solid var(--placeholder-color);
 }
 
 .main .title {
@@ -68,12 +73,75 @@ input::placeholder {
     padding-left: 1em;
 }
 
+
+
 /* style the side bar */
 .side {
-    grid-row: 2 / 3;
+    grid-row: 2 / 3; 
 }
 
-/* just for seeing */
-.content > *:not(.search) {
-    border: 1px solid black;
+.side , 
+.accordion {
+    display: flex;
+    flex-direction: column;   
 }
+
+.side .head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0.4rem;
+}
+
+.accordionHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 8px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+
+    border-top: 1px solid var(--placeholder-color);
+}
+
+.accordionHead p {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4f4f50;
+}
+
+.arrow {
+    transition: transform 400ms ease;
+}
+
+.accordionContent {
+    display: grid;
+    grid-template-rows: 0fr;
+
+    transition: grid-template-rows 400ms ease;
+}
+ 
+.accordionContent > div {
+    overflow: hidden;
+}
+
+.accordionContent ul {
+    padding: 0.4rem 0.8rem;
+}
+
+.accordionContent ul li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+
+
