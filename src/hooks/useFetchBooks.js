@@ -20,6 +20,7 @@
 
 
 import { useEffect, useState } from "react"
+import hashToPrice from "../utils/priceUtil";
 
 // to structure data
 function createBook(obj) {
@@ -28,7 +29,7 @@ function createBook(obj) {
         title: obj.volumeInfo.title,
         author: obj.volumeInfo.authors? obj.volumeInfo.authors[0]:null,
         thumbnail: obj.volumeInfo.imageLinks.smallThumbnail,
-        price: 0
+        price: hashToPrice(obj.volumeInfo.title)
     }
 }
 

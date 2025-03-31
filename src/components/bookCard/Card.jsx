@@ -4,7 +4,6 @@ import styles from "./Card.module.css"
 export default function Card({book}) {
     const thumbnailStyle = {
         backgroundImage: book?.thumbnail ? `url(${book.thumbnail})`: 'none',
-        backgroundColor: '#f3f3f3',
         textAlign: 'center',
         color: '#666'
     }
@@ -24,7 +23,7 @@ export default function Card({book}) {
                     <p className={styles.author}>{book?.author}</p>
                 </div>
                 <div>
-                    <p className={styles.price}>12$</p>
+                    <p className={styles.price}>{book?.price}$</p>
                     <button className={styles.addToCartBtn}>Add To Cart</button>
                 </div>
             </div>
