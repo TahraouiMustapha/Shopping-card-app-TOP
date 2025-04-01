@@ -10,7 +10,43 @@ const accordion = {
         }, {
             id: crypto.randomUUID(),
             value: [20, null]
-        }]
+        }],
+
+    categories: [{
+            id: crypto.randomUUID(),
+            value: 'Adventure'   
+        }, 
+        {
+            id: crypto.randomUUID(),
+            value: 'Classic'   
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Fiction'   
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'History'   
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Pyschology'   
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Science Fiction'   
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Self-help'   
+        }, 
+        {
+            id: crypto.randomUUID(), 
+            value: 'Romance'
+        }, 
+     ]
+
+
 }
 
 
@@ -60,6 +96,14 @@ export default function Accordion({accordiontitle, shownAccordions, handleAccord
                                         checked = {isCheckedPrice[index]}
                                         value={JSON.stringify(priceInterval.value)} />
                                         <label htmlFor="price1"> From {priceInterval.value[0]}$ {!!priceInterval.value[1] && ' to ' + priceInterval.value[1]+ '$'}</label>
+                                    </li>
+                                )}
+
+                                {accordiontitle === 'genres' && 
+                                accordion['categories'].map((categorie, index) => 
+                                    <li key={categorie.id}>
+                                        <input type="checkbox" id={'categorie'+ index} name={'categorie'+ index}/>
+                                        <label htmlFor={'categorie'+ index}>{categorie.value}</label>
                                     </li>
                                 )}
                         </ul>
