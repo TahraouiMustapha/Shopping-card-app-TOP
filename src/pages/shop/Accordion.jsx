@@ -1,13 +1,31 @@
+import { useState } from "react";
 import styles from "./Shop.module.css"
 import { ChevronDown } from "lucide-react"
 
 
 const accordion = {
-    price: [[0, 19.99], [20, null]]
+    price: [{
+            id: crypto.randomUUID(),
+            value: [0, 19.99]
+    }, {
+        id: crypto.randomUUID(),
+        value: [20, null]
+    }]
 }
 
 
 export default function Accordion({accordiontitle, shownAccordions, handleAccordionClick, handlePriceAccordianClick}) {
+    const [isCheckedPrice, setIsCheckedPrice] = useState([false, false]); // based on having two intervals
+
+    function handlePriceIntervalChecked(indexClicked) {
+        let newArray = [...isCheckedPrice] 
+        newArray[indexClicked] = newArray[indexClicked]? false: true;
+        newArray[indexClicked] ? newArray = newArray.map((value, index)=> 
+            index !== indexClicked ? false : true 
+        ): null;
+        setIsCheckedPrice(newArray)
+    }
+
     const accordiontitleWithCapital = accordiontitle[0].toUpperCase() + accordiontitle.slice(1);
 
     return (
@@ -30,12 +48,18 @@ export default function Accordion({accordiontitle, shownAccordions, handleAccord
                     <div>
                         <ul>
                             {accordiontitle === 'price' && 
-                                accordion['price'].map((priceInterval)=> 
-                                    <li>
-                                        <input onClick={handlePriceAccordianClick}
+                                accordion['price'].map((priceInterval, index)=> 
+                                    <li key={priceInterval.id}>
+                                        <input onChange={(e)=> {
+                                            handlePriceIntervalChecked(index)
+                                            e.target.checked
+                                            ? handlePriceAccordianClick(JSON.parse(e.target.value))
+                                            : null
+                                        }}
                                         type="checkbox" id="price1" name="price-intervale-one" 
-                                        value={JSON.stringify(priceInterval)} />
-                                        <label htmlFor="price1"> From {priceInterval[0]}$ {!!priceInterval[1] && 'to' + priceInterval[1]+ '$'}</label>
+                                        checked = {isCheckedPrice[index]}
+                                        value={JSON.stringify(priceInterval.value)} />
+                                        <label htmlFor="price1"> From {priceInterval.value[0]}$ {!!priceInterval.value[1] && ' to ' + priceInterval.value[1]+ '$'}</label>
                                     </li>
                                 )}
                         </ul>
