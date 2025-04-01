@@ -7,10 +7,10 @@ const accordion = {
     price: [{
             id: crypto.randomUUID(),
             value: [0, 19.99]
-    }, {
-        id: crypto.randomUUID(),
-        value: [20, null]
-    }]
+        }, {
+            id: crypto.randomUUID(),
+            value: [20, null]
+        }]
 }
 
 
@@ -54,7 +54,7 @@ export default function Accordion({accordiontitle, shownAccordions, handleAccord
                                             handlePriceIntervalChecked(index)
                                             e.target.checked
                                             ? handlePriceAccordianClick(JSON.parse(e.target.value))
-                                            : null
+                                            : handlePriceAccordianClick(null)
                                         }}
                                         type="checkbox" id="price1" name="price-intervale-one" 
                                         checked = {isCheckedPrice[index]}

@@ -3,10 +3,9 @@ import { useOutletContext } from "react-router-dom";
 import { useBooks } from "../../hooks/useFetchBooks";
 import styles from "./Shop.module.css"
 import Card from "../../components/bookCard/Card";
+import Accordion from "./Accordion";
 
-import { Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
-
-
+import { Search, SlidersHorizontal } from 'lucide-react';
 
 
 function SearchBar({ setSearchValue }) {
@@ -28,7 +27,7 @@ function BooksContainer({books}) {
     )
 }
 
-function ShopSide() {
+function ShopSide({setPriceInterval}) {
     const [shownAccordions, setShownAccordions] = useState({
         price: false, 
         tags: false,
@@ -44,6 +43,9 @@ function ShopSide() {
         setShownAccordions(newShowns)
     }
 
+    function handlePriceAccordianClick(priceInterval) {
+        setPriceInterval(priceInterval)
+    }
 
     return (
         <div className={styles.side}>
@@ -56,7 +58,8 @@ function ShopSide() {
             <Accordion 
             accordiontitle={'price'}
             shownAccordions={shownAccordions}
-            handleAccordionClick={handleAccordionClick}/>
+            handleAccordionClick={handleAccordionClick}
+            handlePriceAccordianClick={handlePriceAccordianClick}/>
 
             <Accordion 
             accordiontitle={'tags'}
@@ -71,52 +74,24 @@ function ShopSide() {
     )
 }
 
-function Accordion({accordiontitle, shownAccordions, handleAccordionClick}) {
-    const accordiontitleWithCapital = accordiontitle[0].toUpperCase() + accordiontitle.slice(1);
-
-    return (
-        <div className={styles.accordion}>
-                <div 
-                className={styles.accordionHead}
-                onClick={()=> handleAccordionClick(accordiontitle)}>
-                    <p>{accordiontitleWithCapital}</p>
-                    <ChevronDown width={32} height={32} 
-                    className={styles.arrow}
-                    style={{
-                        transform: shownAccordions[accordiontitle]? 'rotate(-180deg)': 'none'
-                    }}/>
-                </div>
-                <div 
-                className={styles.accordionContent}
-                style={{
-                    gridTemplateRows: shownAccordions[accordiontitle]? '1fr': '0fr',
-                }}>
-                    <div>
-                        <ul>
-                            <li>
-                                <input type="checkbox" id="price1" name="price-intervale-one" value="['0', '19.99']"/>
-                                <label htmlFor="price1"> From 0.00$ to 19.99$</label>
-                            </li>
-
-                            <li>
-                                <input type="checkbox" id="price2" name="price-intervale-two" value="['20', '']"/>
-                                <label htmlFor="price1"> From 20$ </label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-    )
-}
 
 export default function Shop() {
     const { books, error, loading } = useBooks()
     const [searchValue, setSearchValue] = useState('')
+    const [priceInterval, setPriceInterval] = useState(null);
     const { categorie } = useOutletContext()
 
-    let filterBooks = searchValue 
-            ? books.filter((book)=> book.title.toLowerCase().includes(searchValue.toLowerCase()))
-            : books; 
+    let filterBooks = books;
+
+    if(priceInterval) filterBooks = books.filter((book)=> {
+        if(priceInterval[1]) return book.price >= priceInterval[0] && book.price <= priceInterval[1]
+        return book.price >= priceInterval[0]
+    })
+    
+    if(searchValue) filterBooks = filterBooks.filter((book)=> 
+        book.title.toLowerCase().includes(searchValue.toLowerCase()
+    ));
+
 
     return (
         <div className={styles.content}>
@@ -133,7 +108,7 @@ export default function Shop() {
                     filterBooks?.length > 0 && <BooksContainer books={filterBooks}/>
                 )}
             </div>
-            <ShopSide/>
+            <ShopSide setPriceInterval={setPriceInterval} />
         </div>
 
     )
