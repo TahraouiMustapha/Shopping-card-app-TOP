@@ -9,11 +9,13 @@ import { Search, SlidersHorizontal, ChevronDown } from 'lucide-react';
 
 
 
-function SearchBar() {
+function SearchBar({ setSearchValue }) {
     return (
         <div className={styles.search}>
             <Search color="#9ca3af"/>
-            <input placeholder="Search for books..."/>
+            <input 
+            placeholder="Search for books..."
+            onChange={(e)=> setSearchValue(e.target.value)}/>
         </div>
     )
 }
@@ -21,7 +23,7 @@ function SearchBar() {
 function BooksContainer({books}) {
     return (
         <div className={styles.booksContainer}>
-            {books.map((book)=> <Card book={book}/>)}
+            {books.map((book)=> <Card key={book.id} book={book}/>)}
         </div>
     )
 }
@@ -109,21 +111,26 @@ function Accordion({accordiontitle, shownAccordions, handleAccordionClick}) {
 
 export default function Shop() {
     const { books, error, loading } = useBooks()
+    const [searchValue, setSearchValue] = useState('')
     const { categorie } = useOutletContext()
+
+    let filterBooks = searchValue 
+            ? books.filter((book)=> book.title.toLowerCase().includes(searchValue.toLowerCase()))
+            : books; 
 
     return (
         <div className={styles.content}>
-            <SearchBar/>
+            <SearchBar setSearchValue={setSearchValue} />
             {/* for main seciton */}
             <div className={styles.main}>
                 <h2 className={styles.title}>Books</h2>
-                <p className={styles.numberOfresult}>{books?.length > 0 ? books.length : '0'} results</p>
+                <p className={styles.numberOfresult}>{filterBooks?.length > 0 ? filterBooks.length : '0'} results</p>
                 { error ? (
                     <p>A network error was encountred!</p> 
                 ): loading ? (
                     <p>Loading ...</p>
                 ): (
-                    books?.length > 0 && <BooksContainer books={books}/>
+                    filterBooks?.length > 0 && <BooksContainer books={filterBooks}/>
                 )}
             </div>
             <ShopSide/>
