@@ -29,6 +29,7 @@ function createBook(obj) {
         title: obj.volumeInfo.title,
         author: obj.volumeInfo.authors? obj.volumeInfo.authors[0]:null,
         thumbnail: obj.volumeInfo.imageLinks.smallThumbnail,
+        categorie: obj.volumeInfo.categories ?? 'general',
         price: hashToPrice(obj.volumeInfo.title)
     }
 }
@@ -43,7 +44,7 @@ const useBooks = (numberOfBooks = 30) => {
     useEffect(()=> {
         const fetchBooks = async ()=> {
             try {
-                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=a&startIndex=0&maxResults=${numberOfBooks}&country=US&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI`, {
+                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=t&subject:Fiction|subject:History|subject:Self-help|subject:Bussiness&maxResults=${numberOfBooks}&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI`, {
                     mode: "cors"
                 })
 
@@ -52,7 +53,6 @@ const useBooks = (numberOfBooks = 30) => {
                 }
 
                 const myBooks = await response.json();
-                
                 setBooks(myBooks.items.map((item)=> createBook(item)));
                 setError(null)
             } catch(err) {
