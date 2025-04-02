@@ -3,9 +3,9 @@ import { useOutletContext } from "react-router-dom";
 import { useBooks } from "../../hooks/useFetchBooks";
 import styles from "./Shop.module.css"
 import Card from "../../components/bookCard/Card";
-import Accordion from "./Accordion";
+import { ShopSide } from "./ShopSide";
 
-import { Search, SlidersHorizontal } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 
 function SearchBar({ setSearchValue }) {
@@ -23,74 +23,6 @@ function BooksContainer({books}) {
     return (
         <div className={styles.booksContainer}>
             {books.map((book)=> <Card key={book.id} book={book}/>)}
-        </div>
-    )
-}
-
-function ShopSide({setPriceInterval, setCategorie, parentCategories}) {
-    const [shownAccordions, setShownAccordions] = useState({
-        price: false, 
-        tags: false,
-        genres: false
-    })
-
-    function handleAccordionClick(accordionName) {
-        const newShowns = {
-            ...shownAccordions,
-        }
-        newShowns[accordionName] = shownAccordions[accordionName]? false: true;
-
-        setShownAccordions(newShowns)
-    }
-
-    function handlePriceAccordianClick(priceInterval) {
-        setPriceInterval(priceInterval)
-    }
-
-    function handleGenreAccordianClick(categorie, getOut) {
-        if(categorie) {
-            // to get out the categorie if it exists before
-            if(getOut) { 
-                setCategorie((prevArray)=> {
-                    return prevArray?.includes(categorie)
-                    ? prevArray.filter((cat)=> cat != categorie)
-                    :  prevArray;
-                })
-            } else {
-                setCategorie((prevArray)=> {
-                    return !prevArray?.includes(categorie)
-                    ?  [...prevArray, categorie]
-                    :  prevArray;
-                })
-            }
-        }
-    }
-
-    return (
-        <div className={styles.side}>
-            <div 
-            className={styles.head}>
-                <SlidersHorizontal strokeWidth={3}/>
-                <h2>Filters</h2>
-            </div>
-            
-            <Accordion 
-            accordiontitle={'price'}
-            shownAccordions={shownAccordions}
-            handleAccordionClick={handleAccordionClick}
-            handlePriceAccordianClick={handlePriceAccordianClick}/>
-
-            <Accordion 
-            accordiontitle={'tags'}
-            shownAccordions={shownAccordions}
-            handleAccordionClick={handleAccordionClick}/>
-
-            <Accordion 
-            accordiontitle={'genres'}
-            shownAccordions={shownAccordions}
-            parentCategories={parentCategories}
-            handleGenreAccordianClick={handleGenreAccordianClick}
-            handleAccordionClick={handleAccordionClick}/>
         </div>
     )
 }
