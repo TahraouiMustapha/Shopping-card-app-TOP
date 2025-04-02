@@ -48,6 +48,24 @@ const accordion = {
             id: crypto.randomUUID(), 
             value: 'Business & Economics'
         }
+     ],
+     tags: [
+        {
+            id: crypto.randomUUID(),
+            value: 'Bestseller'
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Emotional'
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Highly Rated'
+        },
+        {
+            id: crypto.randomUUID(),
+            value: 'Trending'
+        }
      ]
 
 
@@ -121,6 +139,20 @@ export default function Accordion({accordiontitle, shownAccordions, parentCatego
                                         <label htmlFor={'categorie'+ index}>{categorie.value}</label>
                                     </li>
                                 )}
+
+                                {accordiontitle === 'tags' && 
+                                    accordion['tags'].map((tag, index)=> 
+                                        <li>
+                                            <input 
+                                            type="checkbox" 
+                                            id={'tag'+ index} 
+                                            name={'tag'+ index}
+                                            value={tag.value}/> 
+                                            <label htmlFor={'tag'+ index}>{tag.value}</label>
+                                        </li>
+                                    )
+                                }
+                                {accordiontitle === 'tags' && <p>Not enough information available to determine tags for this books</p>}
                         </ul>
                     </div>
                 </div>

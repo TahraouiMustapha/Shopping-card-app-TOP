@@ -5,7 +5,7 @@ import styles from "./Shop.module.css"
 import Card from "../../components/bookCard/Card";
 import { ShopSide } from "./ShopSide";
 
-import { Search } from 'lucide-react';
+import { Search, Loader } from 'lucide-react';
 
 
 function SearchBar({ setSearchValue }) {
@@ -35,7 +35,10 @@ export default function Shop() {
     const { categorie, setCategorie } = useOutletContext()
  
     if(error) return <p>A network error was encountered!</p> 
-    if(loading) return <p>Loading ...</p>
+    if(loading) return (
+        <Loader width={56} height={56}
+        className={styles.loaderSpinner}/>
+    )
 
     let filterBooks = books;
 
