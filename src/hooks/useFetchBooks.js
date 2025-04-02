@@ -29,7 +29,7 @@ function createBook(obj) {
         title: obj.volumeInfo.title,
         author: obj.volumeInfo.authors? obj.volumeInfo.authors[0]:null,
         thumbnail: obj.volumeInfo.imageLinks.smallThumbnail,
-        categorie: obj.volumeInfo.categories ?? 'general',
+        categorie: obj.volumeInfo.categories ?? 'Classic',
         price: hashToPrice(obj.volumeInfo.title)
     }
 }
