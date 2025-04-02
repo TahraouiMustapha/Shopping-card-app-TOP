@@ -44,13 +44,17 @@ const accordion = {
             id: crypto.randomUUID(), 
             value: 'Romance'
         }, 
+        {
+            id: crypto.randomUUID(), 
+            value: 'Business & Economics'
+        }
      ]
 
 
 }
 
 
-export default function Accordion({accordiontitle, shownAccordions, handleAccordionClick, handlePriceAccordianClick}) {
+export default function Accordion({accordiontitle, shownAccordions, parentCategories, handleAccordionClick, handlePriceAccordianClick, handleGenreAccordianClick}) {
     const [isCheckedPrice, setIsCheckedPrice] = useState([false, false]); // based on having two intervals
 
     function handlePriceIntervalChecked(indexClicked) {
@@ -63,6 +67,7 @@ export default function Accordion({accordiontitle, shownAccordions, handleAccord
     }
 
     const accordiontitleWithCapital = accordiontitle[0].toUpperCase() + accordiontitle.slice(1);
+
 
     return (
         <div className={styles.accordion}>
@@ -102,7 +107,17 @@ export default function Accordion({accordiontitle, shownAccordions, handleAccord
                                 {accordiontitle === 'genres' && 
                                 accordion['categories'].map((categorie, index) => 
                                     <li key={categorie.id}>
-                                        <input type="checkbox" id={'categorie'+ index} name={'categorie'+ index}/>
+                                        <input onChange={(e) => {
+                                            e.target.checked 
+                                            ? handleGenreAccordianClick(e.target.value, false)
+                                            : handleGenreAccordianClick(e.target.value, true);                                                
+                                        }}
+                                        type="checkbox" 
+                                        id={'categorie'+ index} 
+                                        name={'categorie'+ index}
+                                        value={categorie.value}
+                                        // to check the categorie that been exist already at the state array
+                                        checked={parentCategories.includes(categorie.value) ?? false} /> 
                                         <label htmlFor={'categorie'+ index}>{categorie.value}</label>
                                     </li>
                                 )}

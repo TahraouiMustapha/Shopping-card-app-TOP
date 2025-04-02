@@ -27,7 +27,7 @@ function BooksContainer({books}) {
     )
 }
 
-function ShopSide({setPriceInterval}) {
+function ShopSide({setPriceInterval, setCategorie, parentCategories}) {
     const [shownAccordions, setShownAccordions] = useState({
         price: false, 
         tags: false,
@@ -45,6 +45,25 @@ function ShopSide({setPriceInterval}) {
 
     function handlePriceAccordianClick(priceInterval) {
         setPriceInterval(priceInterval)
+    }
+
+    function handleGenreAccordianClick(categorie, getOut) {
+        if(categorie) {
+            // to get out the categorie if it exists before
+            if(getOut) { 
+                setCategorie((prevArray)=> {
+                    return prevArray?.includes(categorie)
+                    ? prevArray.filter((cat)=> cat != categorie)
+                    :  prevArray;
+                })
+            } else {
+                setCategorie((prevArray)=> {
+                    return !prevArray?.includes(categorie)
+                    ?  [...prevArray, categorie]
+                    :  prevArray;
+                })
+            }
+        }
     }
 
     return (
@@ -69,6 +88,8 @@ function ShopSide({setPriceInterval}) {
             <Accordion 
             accordiontitle={'genres'}
             shownAccordions={shownAccordions}
+            parentCategories={parentCategories}
+            handleGenreAccordianClick={handleGenreAccordianClick}
             handleAccordionClick={handleAccordionClick}/>
         </div>
     )
@@ -79,7 +100,7 @@ export default function Shop() {
     const { books, error, loading } = useBooks()
     const [searchValue, setSearchValue] = useState('')
     const [priceInterval, setPriceInterval] = useState(null);
-    const { categorie } = useOutletContext()
+    const { categorie, setCategorie } = useOutletContext()
 
     let filterBooks = books;
 
@@ -91,6 +112,7 @@ export default function Shop() {
     if(searchValue) filterBooks = filterBooks.filter((book)=> 
         book.title.toLowerCase().includes(searchValue.toLowerCase()
     ));
+
 
 
     return (
@@ -108,7 +130,7 @@ export default function Shop() {
                     filterBooks?.length > 0 && <BooksContainer books={filterBooks}/>
                 )}
             </div>
-            <ShopSide setPriceInterval={setPriceInterval} />
+            <ShopSide setPriceInterval={setPriceInterval} setCategorie={setCategorie} parentCategories={categorie}/>
         </div>
 
     )
