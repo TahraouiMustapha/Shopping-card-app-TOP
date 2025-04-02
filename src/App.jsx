@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 import NavigationBar from "./components/navigationBar/NavigationBar"
 
 export default function App() {
-    const [categorie, setCategorie] = useState('')
+    const [categorie, setCategorie] = useState([])
 
     return (
       <>

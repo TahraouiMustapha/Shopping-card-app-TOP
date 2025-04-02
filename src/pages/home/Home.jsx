@@ -9,7 +9,7 @@ import fictionImg from "../../assets/images/fiction_category.png"
 import businessImg from "../../assets/images/business_categorie.jpg"
 
 
-const categories = [{id: crypto.randomUUID(), categorieName:'Self-Help', categorieImage: selfHelpImg},
+const categories = [{id: crypto.randomUUID(), categorieName:'Self-help', categorieImage: selfHelpImg},
                     {id: crypto.randomUUID(), categorieName:'History', categorieImage: historyImg},
                     {id: crypto.randomUUID(), categorieName:'Fiction', categorieImage: fictionImg},
                     {id: crypto.randomUUID(), categorieName:'Business & Economics', categorieImage: businessImg}
@@ -23,7 +23,15 @@ function Home(){
     
 
     function handleCategorieClick(categorieName) {
-        setCategorie(categorieName)
+        if(categorieName) {
+            setCategorie((prevCategoriesArr)=> {
+                if(prevCategoriesArr) {
+                    return !prevCategoriesArr.includes(categorieName)
+                    ? [...prevCategoriesArr, categorieName]
+                    : prevCategoriesArr; 
+                } 
+            })
+        }
         navigate('/shop');
     }    
 
