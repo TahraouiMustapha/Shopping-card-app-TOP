@@ -142,7 +142,7 @@ export default function Accordion({accordiontitle, shownAccordions, parentCatego
 
                                 {accordiontitle === 'tags' && 
                                     accordion['tags'].map((tag, index)=> 
-                                        <li>
+                                        <li key={tag.id}>
                                             <input 
                                             type="checkbox" 
                                             id={'tag'+ index} 

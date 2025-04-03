@@ -53,7 +53,6 @@ const useBooks = (numberOfBooks = 30) => {
                 }
 
                 const myBooks = await response.json();
-                console.log(myBooks.items)
                 setBooks(myBooks.items.map((item)=> createBook(item)));
                 setError(null)
             } catch(err) {

@@ -24,9 +24,6 @@ function NavigationBar() {
             </div>
 
             <div>
-                <NavLink title={'Search'}>
-                    <Search size={32}/>
-                </NavLink>
                 <NavLink title={'Cart'}>
                     <ShoppingCart size={32}/>
                 </NavLink>
