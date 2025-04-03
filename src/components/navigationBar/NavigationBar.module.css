@@ -28,6 +28,8 @@ a {
     align-items: center;
     gap: 12px;
     cursor: pointer;
+
+    position: relative;
 }
 
 .navigationBar > div > *:not(.logo) {
@@ -45,4 +47,20 @@ a,
 a:hover ,
 .navLink p:hover {
     border-bottom: 1px solid var(--logo-color);
+}
+
+.navLink .itemsNumber {
+    background-color: red;
+    text-align: center;
+    width: 16px;
+    height: 22px;
+    font-size: 0.7em;
+    font-weight: 500;
+    border-radius: 30%;
+    color: white;
+
+
+    position: absolute;
+    top:0;
+    left: 30%;
 }

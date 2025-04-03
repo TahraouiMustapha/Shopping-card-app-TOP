@@ -5,11 +5,16 @@ import { ShoppingCart } from "lucide-react"
 
 
 
-function NavLink({title, children}) {
+function NavLink({title, children, itemsNumber}) {
     return(
         <div className={styles.navLink}>
             {children}
-            {title == 'Cart' && <Link to='cart'>{title}</Link>}
+            {title === 'Cart' && (
+                <>
+                <Link to='cart'>{title}</Link>
+                {itemsNumber !== 0 && <div className={styles.itemsNumber}>{itemsNumber}</div>}
+                </>
+            )}
         </div>
     )
 }
@@ -25,9 +30,8 @@ function NavigationBar({itemsNumber}) {
             </div>
 
             <div>
-                <NavLink title={'Cart'}>
-                    <ShoppingCart size={32}/>
-                    {itemsNumber}
+                <NavLink title={'Cart'} itemsNumber={itemsNumber}>
+                    <ShoppingCart size={32} className={styles.icon}/>
                 </NavLink>
             </div>
         </div>
