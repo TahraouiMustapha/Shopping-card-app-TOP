@@ -9,7 +9,7 @@ function NavLink({title, children}) {
     return(
         <div className={styles.navLink}>
             {children}
-            <p>{title}</p>
+            {title == 'Cart' && <Link to='cart'>{title}</Link>}
         </div>
     )
 }
