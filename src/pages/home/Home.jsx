@@ -22,7 +22,7 @@ function Home(){
     const { trendingBooks, trendingError, trendingLoading } = useTrendingBooks();
     const { bestSellerBooks, bestSellerError, bestSellerLoading } = useBestSellerBooks()
     const navigate = useNavigate();
-    const { setCategorie } = useOutletContext()
+    const { setCategorie, setCartBooks } = useOutletContext()
     
 
     function handleCategorieClick(categorieName) {
@@ -37,6 +37,26 @@ function Home(){
         }
         navigate('/shop');
     }    
+
+    function handleAddToCartClick(book) {
+        setCartBooks((prevBooks)=> {
+            let newCartBooks = prevBooks ?? new Map();
+
+            if(!newCartBooks.has(book.id)) {
+                newCartBooks.set(book.id, {
+                    bookObj: book,
+                    quantity: 1
+                })
+            } else {
+                const oldObj = newCartBooks.get(book.id);
+                newCartBooks.set(book.id, {
+                    ...oldObj,
+                    quantity: oldObj.quantity + 1 
+                })
+            }
+            return newCartBooks;
+        })
+    }
 
     return (
         <div className={styles.content}>
@@ -78,7 +98,7 @@ function Home(){
                     <Loader width={56} height={56}
                     className={indexStyle.loaderSpinner}/>
                 ): (
-                    trendingBooks?.length > 0 && <Slide books={trendingBooks}/> 
+                    trendingBooks?.length > 0 && <Slide books={trendingBooks} handleAddToCartClick={handleAddToCartClick}/> 
                 )}
             </div>
 
@@ -94,7 +114,7 @@ function Home(){
                 ): bestSellerLoading ? (
                     <Loader width={56} height={56}
                     className={indexStyle.loaderSpinner}/>
-                ): bestSellerBooks?.length > 0 && <Slide books={bestSellerBooks}/>}
+                ): bestSellerBooks?.length > 0 && <Slide books={bestSellerBooks} handleAddToCartClick={handleAddToCartClick}/>}
             </div>
         </div>
     )

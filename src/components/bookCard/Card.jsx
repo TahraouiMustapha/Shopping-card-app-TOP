@@ -1,13 +1,12 @@
 import styles from "./Card.module.css"
 
 
-export default function Card({book}) {
+export default function Card({book, handleAddToCartClick}) {
     const thumbnailStyle = {
         backgroundImage: book?.thumbnail ? `url(${book.thumbnail})`: 'none',
         textAlign: 'center',
         color: '#666'
     }
-
 
     return (
         <div className={styles.card}>
@@ -24,7 +23,8 @@ export default function Card({book}) {
                 </div>
                 <div>
                     <p className={styles.price}>{book?.price}$</p>
-                    <button className={styles.addToCartBtn}>Add To Cart</button>
+                    <button onClick={()=> handleAddToCartClick(book)}
+                    className={styles.addToCartBtn}>Add To Cart</button>
                 </div>
             </div>
         </div>

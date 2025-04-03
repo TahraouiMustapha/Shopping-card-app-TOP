@@ -20,10 +20,11 @@ function SearchBar({ setSearchValue }) {
     )
 }
 
-function BooksContainer({books}) {
+function BooksContainer({books, handleAddToCartClick}) {
+
     return (
         <div className={styles.booksContainer}>
-            {books.map((book)=> <Card key={book.id} book={book}/>)}
+            {books.map((book)=> <Card key={book.id} book={book} handleAddToCartClick={handleAddToCartClick}/>)}
         </div>
     )
 }
@@ -33,13 +34,35 @@ export default function Shop() {
     const { books, error, loading } = useBooks()
     const [searchValue, setSearchValue] = useState('')
     const [priceInterval, setPriceInterval] = useState(null);
-    const { categorie, setCategorie } = useOutletContext()
+    const { categorie, setCategorie, setCartBooks } = useOutletContext()
  
     if(error) return <p>A network error was encountered!</p> 
     if(loading) return (
         <Loader width={56} height={56}
         className={indexStyles.loaderSpinner}/>
     )
+
+
+
+    function handleAddToCartClick(book) {
+        setCartBooks((prevBooks)=> {
+            let newCartBooks = prevBooks ?? new Map();
+
+            if(!newCartBooks.has(book.id)) {
+                newCartBooks.set(book.id, {
+                    bookObj: book,
+                    quantity: 1
+                })
+            } else {
+                const oldObj = newCartBooks.get(book.id);
+                newCartBooks.set(book.id, {
+                    ...oldObj,
+                    quantity: oldObj.quantity + 1 
+                })
+            }
+            return newCartBooks;
+        })
+    }
 
     let filterBooks = books;
 
@@ -57,6 +80,7 @@ export default function Shop() {
         book.title.toLowerCase().includes(searchValue.toLowerCase()
     ));
 
+
     return (
         <div className={styles.content}>
             <SearchBar setSearchValue={setSearchValue} />
@@ -65,7 +89,7 @@ export default function Shop() {
                 <h2 className={styles.title}>Books</h2>
                 <p className={styles.numberOfresult}>{filterBooks?.length > 0 ? filterBooks.length : '0'} results</p>
                 { filterBooks?.length > 0 
-                ? <BooksContainer books={filterBooks}/>
+                ? <BooksContainer books={filterBooks} handleAddToCartClick={handleAddToCartClick}/>
                 : 'No books found'}
             </div>
             <ShopSide setPriceInterval={setPriceInterval} setCategorie={setCategorie} parentCategories={categorie}/>
