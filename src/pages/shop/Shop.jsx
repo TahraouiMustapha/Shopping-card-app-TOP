@@ -34,7 +34,7 @@ export default function Shop() {
     const { books, error, loading } = useBooks()
     const [searchValue, setSearchValue] = useState('')
     const [priceInterval, setPriceInterval] = useState(null);
-    const { categorie, setCategorie, setCartBooks } = useOutletContext()
+    const { categorie, setCategorie, setCartBooksState } = useOutletContext()
  
     if(error) return <p>A network error was encountered!</p> 
     if(loading) return (
@@ -45,22 +45,27 @@ export default function Shop() {
 
 
     function handleAddToCartClick(book) {
-        setCartBooks((prevBooks)=> {
-            let newCartBooks = prevBooks ?? new Map();
+        setCartBooksState((prevBooksState)=> {
+            let newMap = new Map(prevBooksState.cartBooks);      
+            let size = prevBooksState.size;   
 
-            if(!newCartBooks.has(book.id)) {
-                newCartBooks.set(book.id, {
+            if(!newMap.has(book.id)) {
+                newMap.set(book.id, {
                     bookObj: book,
                     quantity: 1
                 })
+                size += 1
             } else {
-                const oldObj = newCartBooks.get(book.id);
-                newCartBooks.set(book.id, {
+                const oldObj = newMap.get(book.id);
+                newMap.set(book.id, {
                     ...oldObj,
                     quantity: oldObj.quantity + 1 
                 })
             }
-            return newCartBooks;
+            return {
+                cartBooks:newMap,
+                size: size
+            } 
         })
     }
 

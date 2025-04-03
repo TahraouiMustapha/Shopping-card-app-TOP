@@ -1,9 +1,9 @@
 import { useOutletContext } from "react-router-dom"
 
 export default function Cart() {
-    const { cartBooks } = useOutletContext() 
+    const { cartBooksState } = useOutletContext() 
 
-    console.log(cartBooks.entries())
+    console.log(cartBooksState.cartBooks.entries())
 
 
     return (

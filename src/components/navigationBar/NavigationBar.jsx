@@ -14,7 +14,7 @@ function NavLink({title, children}) {
     )
 }
 
-function NavigationBar() {
+function NavigationBar({itemsNumber}) {
     return (
         <div className={styles.navigationBar}>
 
@@ -27,6 +27,7 @@ function NavigationBar() {
             <div>
                 <NavLink title={'Cart'}>
                     <ShoppingCart size={32}/>
+                    {itemsNumber}
                 </NavLink>
             </div>
         </div>

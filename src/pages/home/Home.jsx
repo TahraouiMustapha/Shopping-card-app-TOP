@@ -22,7 +22,7 @@ function Home(){
     const { trendingBooks, trendingError, trendingLoading } = useTrendingBooks();
     const { bestSellerBooks, bestSellerError, bestSellerLoading } = useBestSellerBooks()
     const navigate = useNavigate();
-    const { setCategorie, setCartBooks } = useOutletContext()
+    const { setCategorie, setCartBooksState } = useOutletContext()
     
 
     function handleCategorieClick(categorieName) {
@@ -39,22 +39,27 @@ function Home(){
     }    
 
     function handleAddToCartClick(book) {
-        setCartBooks((prevBooks)=> {
-            let newCartBooks = prevBooks ?? new Map();
+        setCartBooksState((prevBooksState)=> {
+            let newMap = new Map(prevBooksState.cartBooks);      
+            let size = prevBooksState.size;   
 
-            if(!newCartBooks.has(book.id)) {
-                newCartBooks.set(book.id, {
+            if(!newMap.has(book.id)) {
+                newMap.set(book.id, {
                     bookObj: book,
                     quantity: 1
                 })
+                size += 1
             } else {
-                const oldObj = newCartBooks.get(book.id);
-                newCartBooks.set(book.id, {
+                const oldObj = newMap.get(book.id);
+                newMap.set(book.id, {
                     ...oldObj,
                     quantity: oldObj.quantity + 1 
                 })
             }
-            return newCartBooks;
+            return {
+                cartBooks:newMap,
+                size: size
+            } 
         })
     }
 

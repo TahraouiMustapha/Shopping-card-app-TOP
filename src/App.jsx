@@ -5,18 +5,21 @@ import NavigationBar from "./components/navigationBar/NavigationBar"
 
 export default function App() {
     const [categorie, setCategorie] = useState([])
-    const [cartBooks, setCartBooks] = useState(new Map())
+    const [cartBooksState, setCartBooksState] = useState({
+      cartBooks: new Map(),
+      size: 0
+    })
 
     return (
       <>
-        <NavigationBar/>
+        <NavigationBar itemsNumber={cartBooksState.size}/>
         <div className="content-container">
           <Outlet context={
             {
               categorie, 
               setCategorie,
-              cartBooks, 
-              setCartBooks
+              cartBooksState, 
+              setCartBooksState
             }
             }/>
         </div>
