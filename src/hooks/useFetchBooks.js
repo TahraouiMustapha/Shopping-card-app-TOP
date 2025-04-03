@@ -99,4 +99,38 @@ const useTrendingBooks = ()=> {
     return { trendingBooks, trendingError, trendingLoading }
 }
 
-export { useBooks, useTrendingBooks };
+function useBestSellerBooks() {
+    const [bestSellerBooks, setBestSellerBooks] = useState(null);
+    const [bestSellerError, setBestSellerError] = useState(null);
+    const [bestSellerLoading, setBestSellerLoading] = useState(true);
+
+    useEffect(()=> {
+        const fetchBooks = async()=>{
+            try {
+                const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=bestseller&country=US&filter=paid-ebooks&orderBy=newest&maxResults=10&key=AIzaSyBtMQ1A0xwSVvhZnDRg2n_QdCsl_zV_PWI', {
+                    mode: 'cors'
+                })
+
+                if(response.status  !== 200 || !response.ok) {
+                    throw new Error(`HTTP error: Status ${response.status}`)
+                }
+
+                const myBooks = await response.json()
+                const books = myBooks.items.map((book)=> createBook(book))
+                setBestSellerBooks(books);
+                setBestSellerError(null)
+            } catch(err) {
+                setBestSellerError(err)
+            } finally {
+                setBestSellerLoading(false)
+            }
+        }
+
+        fetchBooks();
+    }, [])
+
+    return {bestSellerBooks, bestSellerError, bestSellerLoading};
+}
+
+
+export { useBooks, useTrendingBooks, useBestSellerBooks };
