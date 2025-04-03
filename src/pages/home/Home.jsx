@@ -1,12 +1,14 @@
 import { useNavigate, useOutletContext, Link } from "react-router-dom";
-import { useTrendingBooks } from "../../hooks/useFetchBooks";
+import { useTrendingBooks, useBestSellerBooks } from "../../hooks/useFetchBooks";
 import Slide from "../../components/slide/Slide";
 import styles from "./Home.module.css"
+import indexStyle from "../../index.module.css"
 
 import selfHelpImg from "../../assets/images/self-help_category.png"
 import historyImg from "../../assets/images/history_category.png"
 import fictionImg from "../../assets/images/fiction_category.png"
 import businessImg from "../../assets/images/business_categorie.jpg"
+import { Loader } from "lucide-react";
 
 
 const categories = [{id: crypto.randomUUID(), categorieName:'Self-help', categorieImage: selfHelpImg},
@@ -18,6 +20,7 @@ const categories = [{id: crypto.randomUUID(), categorieName:'Self-help', categor
                 
 function Home(){
     const { trendingBooks, trendingError, trendingLoading } = useTrendingBooks();
+    const { bestSellerBooks, bestSellerError, bestSellerLoading } = useBestSellerBooks()
     const navigate = useNavigate();
     const { setCategorie } = useOutletContext()
     
@@ -72,10 +75,26 @@ function Home(){
                 {trendingError ? (
                     <p>A network error was encountred!</p>    
                 ): trendingLoading ? (
-                    <p>Loading ...</p>
+                    <Loader width={56} height={56}
+                    className={indexStyle.loaderSpinner}/>
                 ): (
-                    trendingBooks?.length > 0 && <Slide trendingBooks={trendingBooks}/> 
+                    trendingBooks?.length > 0 && <Slide books={trendingBooks}/> 
                 )}
+            </div>
+
+            {/* bestSeller section */}
+            <div className={styles.trending}> 
+                <div className={styles.head}>
+                    <h1 className={styles.title}>Bestsellers</h1>
+                    <Link to='/shop' className={styles.seeMore}>see more</Link>
+                </div>
+
+                {bestSellerError ? (
+                    <p>A network error was encountered!</p>
+                ): bestSellerLoading ? (
+                    <Loader width={56} height={56}
+                    className={indexStyle.loaderSpinner}/>
+                ): bestSellerBooks?.length > 0 && <Slide books={bestSellerBooks}/>}
             </div>
         </div>
     )

@@ -33,3 +33,21 @@ body {
   flex: 1;
 }
 
+
+.loaderSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  animation: spinner 3s infinite linear;
+}
+
+@keyframes spinner {
+  from {
+      transform: translateX(-50%) rotate(0);
+  }
+
+  to {
+      transform: translateX(-50%) rotate(360deg);
+  }
+  
+}

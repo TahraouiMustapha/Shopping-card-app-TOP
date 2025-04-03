@@ -145,21 +145,5 @@ input[type="checkbox"] {
     height: 20px;
 }
 
-.loaderSpinner {
-    position: absolute;
-    top: 30vh;
-    left: 50%;
-    animation: spinner 3s infinite linear;
-}
 
-@keyframes spinner {
-    from {
-        transform: translateX(-50%) rotate(0);
-    }
-
-    to {
-        transform: translateX(-50%) rotate(360deg);
-    }
-    
-}
 

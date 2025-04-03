@@ -9,7 +9,6 @@
     grid-template-columns: 32px 1fr 32px;
     align-items: center;
     padding: 0 calc(var(--padding-in-content) - 32px);
-
 }
 
 .cardsContainer {

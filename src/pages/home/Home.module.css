@@ -114,6 +114,11 @@
 }
 
 /* trending section */ 
+.trending {
+    position: relative;
+    min-height: 300px;
+}
+
 .trending .head { 
     margin-top: 56px;
     padding: 0 var(--padding-in-content);

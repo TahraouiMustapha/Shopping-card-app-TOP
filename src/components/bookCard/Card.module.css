@@ -39,7 +39,8 @@
     flex-grow: 1;
 }
 
-.card .title {
+.card .title ,
+.card .author{
     height: 32px;
     overflow: hidden;             
     text-overflow: ellipsis; 
