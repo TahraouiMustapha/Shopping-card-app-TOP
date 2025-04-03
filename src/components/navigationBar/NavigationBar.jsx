@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import styles from "./NavigationBar.module.css"
-import { Search, ShoppingCart } from "lucide-react"
+import "../../index.module.css"
+import { ShoppingCart } from "lucide-react"
 
 
 

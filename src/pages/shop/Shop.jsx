@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useBooks } from "../../hooks/useFetchBooks";
 import styles from "./Shop.module.css"
+import indexStyles from "../../index.module.css"
 import Card from "../../components/bookCard/Card";
 import { ShopSide } from "./ShopSide";
 
@@ -37,7 +38,7 @@ export default function Shop() {
     if(error) return <p>A network error was encountered!</p> 
     if(loading) return (
         <Loader width={56} height={56}
-        className={styles.loaderSpinner}/>
+        className={indexStyles.loaderSpinner}/>
     )
 
     let filterBooks = books;
