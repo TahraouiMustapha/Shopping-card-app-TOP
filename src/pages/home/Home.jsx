@@ -40,7 +40,7 @@ function Home(){
 
     function handleAddToCartClick(book) {
         setCartBooksState((prevBooksState)=> {
-            let newMap = new Map(prevBooksState.cartBooks);      
+            let newMap = new Map(prevBooksState.books);      
             let size = prevBooksState.size;   
 
             if(!newMap.has(book.id)) {
@@ -57,7 +57,7 @@ function Home(){
                 })
             }
             return {
-                cartBooks:newMap,
+                books:newMap,
                 size: size
             } 
         })

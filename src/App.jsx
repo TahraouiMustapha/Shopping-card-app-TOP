@@ -6,7 +6,7 @@ import NavigationBar from "./components/navigationBar/NavigationBar"
 export default function App() {
     const [categorie, setCategorie] = useState([])
     const [cartBooksState, setCartBooksState] = useState({
-      cartBooks: new Map(),
+      books: new Map(),
       size: 0
     })
 
