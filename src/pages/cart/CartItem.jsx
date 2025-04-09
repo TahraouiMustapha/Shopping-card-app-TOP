@@ -19,7 +19,7 @@ export default function CartItem({item, changeQuantityInItemsArray}) {
 
     return (
         <div> 
-            <p>{item.bookObj.price}</p>
+            <p>{Number(item.bookObj.price).toFixed(2)}</p>
             <div>
                 <button
                 data-id = {item.bookObj.id}
@@ -30,7 +30,7 @@ export default function CartItem({item, changeQuantityInItemsArray}) {
                 onClick={handleAddQuantity}>+</button>
             </div>
 
-            <p>{itemTotal}</p>
+            <p>{itemTotal.toFixed(2)}</p>
 
         </div>   
     )

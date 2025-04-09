@@ -2,6 +2,14 @@ import { useOutletContext } from "react-router-dom"
 import CartItem from "./CartItem";
 
 
+function calculateSubtotal(itemsArray) {
+    let total = 0 ;
+    for(let item of itemsArray ) {
+        total += item[1].bookObj.price * item[1].quantity
+    }
+    return total.toFixed(2);
+}
+
 export default function Cart() {
     const { cartBooksState, setCartBooksState } = useOutletContext() 
     // cartBooksState = {books: new Map(),size: 0}
@@ -34,7 +42,7 @@ export default function Cart() {
                     item={itemsArray[1]}/>
                 )
             }
-            <p>subTotal:</p>
+            <p>subTotal:{calculateSubtotal(myItems)}</p>
         </>
     )
 }
