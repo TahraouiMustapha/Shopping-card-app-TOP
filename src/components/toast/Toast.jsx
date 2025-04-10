@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react"
+import { Check } from "lucide-react";
+import styles from "./Toast.module.css"
 
 export default function Toast({ setIsVisible }) {
     const dialogRef = useRef(null);
-    const timeOutRef = useRef(null)
 
     useEffect(()=> {
         if(dialogRef.current) dialogRef.current.showModal()
 
-        timeOutRef.current = setTimeout(()=> {
+        const myTime = setTimeout(()=> {
             if(!dialogRef.current) return
 
             if(dialogRef.current.open) {
@@ -15,7 +16,7 @@ export default function Toast({ setIsVisible }) {
             }
         }, 1000)
 
-        return () => clearTimeout(timeOutRef.current)
+        return () => clearTimeout(myTime)
 
     }, [setIsVisible])
 
@@ -25,9 +26,16 @@ export default function Toast({ setIsVisible }) {
         style={{
             top: '50%', 
             left: '50%', 
-            transform:'translateX(-50%)' 
+            transform:'translateX(-50%)' , 
         }}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit
+            <div className={styles.content}>
+                <div className={styles.doneIconContainer}>
+                    <Check strokeWidth={3}/>
+                </div>
+                <p className={styles.message}>
+                    item added to your cart
+                </p>
+            </div>
         </dialog>
     )
 } 

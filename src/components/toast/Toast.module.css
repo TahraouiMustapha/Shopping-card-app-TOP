@@ -1,0 +1,38 @@
+dialog {
+    border: none;
+    height: 150px;
+    width: 300px;
+    border-radius: 12px;
+    background-color: #374151;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    flex-direction: column;
+
+    color: white;
+}
+
+.doneIconContainer {
+    --circle-width: 60px;
+    background-color: white;
+    width: var(--circle-width);
+    height: var(--circle-width);
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #374151;
+}
+
+.message {
+    font-size: 1.4em;
+}
