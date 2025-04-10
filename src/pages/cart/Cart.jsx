@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom"
 import CartItem from "./CartItem";
+import styles from "./Cart.module.css"
 
 
 function calculateSubtotal(itemsArray) {
@@ -47,17 +48,31 @@ export default function Cart() {
         }
     }
 
+    const titles = ['Item', 'Price', 'Quantity', 'Total', ''];
     return ( 
-        <>  
-            {
-                myItems.map((itemsArray)=> 
-                    <CartItem key={itemsArray[0]} 
-                    changeQuantityInItemsArray={changeQuantityInItemsArray}
-                    deleteItem={deleteItem}
-                    item={itemsArray[1]}/>
-                )
-            }
-            <p>subTotal:{calculateSubtotal(myItems)}</p>
-        </>
+        <div className={styles.content}>  
+            <h2 className={styles.title}>Your Shopping Cart</h2>
+            <div className={styles.main}>
+                <div className={styles.itemsContainer}>
+                    <div className={styles.head}>
+                        {titles.map((title, index)=> <p key={index}>{title.toUpperCase()}</p>)}
+                    </div>
+                    
+                    {
+                        myItems.map((itemsArray)=> 
+                            <CartItem key={itemsArray[0]} 
+                            changeQuantityInItemsArray={changeQuantityInItemsArray}
+                            deleteItem={deleteItem}
+                            item={itemsArray[1]}/>
+                        )
+                    }
+                </div>
+                <div className={styles.orderSummary}>
+                    <p>subTotal:{calculateSubtotal(myItems)}</p>
+                </div>
+            </div>
+
+
+        </div>
     )
 }
