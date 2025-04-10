@@ -75,7 +75,8 @@ export default function Cart() {
                         <p>({myItems.length} items)</p> 
                     </div>
                     <div className={styles.shippingInfo}>Shipping and taxes computed at checkout</div>
-                    <button className={styles.checkoutBtn}>Checkout</button>
+                    <button className={styles.checkoutBtn}
+                    onClick={()=> alert('we are going to implement this logic soon')}>Checkout</button>
                     <Link className={styles.continueShopping} to={'/shop'}>Continue Shopping</Link>
                 </div>
             </div>
