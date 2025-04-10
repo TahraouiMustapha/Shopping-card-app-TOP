@@ -108,8 +108,62 @@
 }
 
 .orderSummary {
-    height: 300px;
-    width: 300px;
+    --order-summary-width: 350px;
+    height: var(--order-summary-width);
+    width: var(--order-summary-width);
+    border: 1px solid black;
+    padding: 1rem 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-/* for seeing */
+.orderSummary .title {
+    font-weight: 600;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+  
+.orderSummary .subtotalContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.subtotalContainer p:nth-child(1) , 
+.subtotal {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.subtotal {
+    justify-self: end;
+    font-weight: 900;
+
+}
+
+.shippingInfo {
+    font-style: italic;
+    padding: 0 4px;
+}
+
+.checkoutBtn {
+    padding: 12px 0;
+    border: none;
+    font-size: 1.3em;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    color: white;
+    background-color: var(--logo-color);
+    cursor: pointer;
+}
+
+.checkoutBtn:hover {
+    filter: brightness(120%) 
+}
+
+
+.continueShopping {
+    align-self: flex-end;
+    font-size: 1.2em;
+}

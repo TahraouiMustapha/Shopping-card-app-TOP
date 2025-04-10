@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, Link } from "react-router-dom"
 import CartItem from "./CartItem";
 import styles from "./Cart.module.css"
 
@@ -68,7 +68,15 @@ export default function Cart() {
                     }
                 </div>
                 <div className={styles.orderSummary}>
-                    <p>subTotal:{calculateSubtotal(myItems)}</p>
+                    <div className={styles.title}>Order Summary</div>
+                    <div className={styles.subtotalContainer}>
+                        <p>Subtotal</p>
+                        <p className={styles.subtotal}>${calculateSubtotal(myItems)}</p>
+                        <p>({myItems.length} items)</p> 
+                    </div>
+                    <div className={styles.shippingInfo}>Shipping and taxes computed at checkout</div>
+                    <button className={styles.checkoutBtn}>Checkout</button>
+                    <Link className={styles.continueShopping} to={'/shop'}>Continue Shopping</Link>
                 </div>
             </div>
 
