@@ -1,8 +1,7 @@
 // cartBooksState.books obj {key, value} = {key: book.id, value : { bookObj: book, quantity: 1}
 
 
-export default function CartItem({item, changeQuantityInItemsArray}) {
-
+export default function CartItem({item, changeQuantityInItemsArray, deleteItem}) {
     const itemTotal = item.quantity * item.bookObj.price; 
 
     function handleAddQuantity(e) {
@@ -16,7 +15,7 @@ export default function CartItem({item, changeQuantityInItemsArray}) {
         const newQuantity = item.quantity <= 0? 0: item.quantity - 1
         changeQuantityInItemsArray(id, newQuantity);
     }
-
+    
     return (
         <div> 
             <p>{Number(item.bookObj.price).toFixed(2)}</p>
@@ -31,6 +30,10 @@ export default function CartItem({item, changeQuantityInItemsArray}) {
             </div>
 
             <p>{itemTotal.toFixed(2)}</p>
+
+            <button data-id={item.bookObj.id} 
+            onClick={(e)=> deleteItem(e.target.dataset.id)}
+            >remove</button>
 
         </div>   
     )

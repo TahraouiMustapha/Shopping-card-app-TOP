@@ -31,7 +31,21 @@ export default function Cart() {
                 }
             })   
         }
-    }   
+    }
+    
+    function deleteItem(id) {
+        if(cartBooksState.books.has(id)) {
+            setCartBooksState((prevState)=> {
+                const myMap = new Map(prevState.books)
+                myMap.delete(id)
+
+                return {
+                    books: myMap, 
+                    size: prevState.size - 1
+                }
+            })
+        }
+    }
 
     return ( 
         <>  
@@ -39,6 +53,7 @@ export default function Cart() {
                 myItems.map((itemsArray)=> 
                     <CartItem key={itemsArray[0]} 
                     changeQuantityInItemsArray={changeQuantityInItemsArray}
+                    deleteItem={deleteItem}
                     item={itemsArray[1]}/>
                 )
             }
