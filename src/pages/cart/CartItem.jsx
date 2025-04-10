@@ -34,9 +34,10 @@ export default function CartItem({item, changeQuantityInItemsArray, deleteItem})
 
             <p>${itemTotal.toFixed(2)}</p>
 
-            <button data-id={item.bookObj.id} 
+            <button className={styles.removeBtn} 
+            data-id={item.bookObj.id} 
             onClick={(e)=> deleteItem(e.target.dataset.id)}
-            >remove</button>
+            >Remove</button>
         </div>   
     )
 }
