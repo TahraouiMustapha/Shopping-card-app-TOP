@@ -6,7 +6,7 @@
 
 .content {
     --template-column: 3fr 1fr 1.5fr repeat(2,  1fr);
-    --placeholder-color: #a9adb3;
+    --placeholder-color: #bcbec2;
 
     min-height: 90vh;
     width: 100%;
@@ -87,6 +87,33 @@
 .cartItem > p {
     width: 70%;
     overflow: hidden;
+}
+
+.cartItem .quantity {
+    width: 140px;
+    display: flex;
+    height: 48px;
+
+    border: 0.8px solid var(--placeholder-color);
+}
+.cartItem .quantity > * {
+    flex: 1;
+}
+
+.quantity button {
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.quantity button:hover {
+    background-color: #ccced1;
+} 
+
+.quantity p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .orderSummary {
