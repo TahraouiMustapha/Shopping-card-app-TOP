@@ -20,11 +20,13 @@ function SearchBar({ setSearchValue }) {
     )
 }
 
-function BooksContainer({books, handleAddToCartClick}) {
+function BooksContainer({books, handleAddToCartClick, handleShowToast}) {
 
     return (
         <div className={styles.booksContainer}>
-            {books.map((book)=> <Card key={book.id} book={book} handleAddToCartClick={handleAddToCartClick}/>)}
+            {books.map((book)=> <Card key={book.id} book={book}
+            handleShowToast={handleShowToast}    
+            handleAddToCartClick={handleAddToCartClick}/>)}
         </div>
     )
 }
@@ -34,7 +36,7 @@ export default function Shop() {
     const { books, error, loading } = useBooks()
     const [searchValue, setSearchValue] = useState('')
     const [priceInterval, setPriceInterval] = useState(null);
-    const { categorie, setCategorie, setCartBooksState } = useOutletContext()
+    const { categorie, setCategorie, setCartBooksState, setIsVisible } = useOutletContext()
  
     if(error) return <p>A network error was encountered!</p> 
     if(loading) return (
@@ -69,6 +71,10 @@ export default function Shop() {
         })
     }
 
+    function handleShowToast() {
+        setIsVisible(true)
+    }
+
     let filterBooks = books;
 
     if(priceInterval) filterBooks = filterBooks.filter((book)=> {
@@ -94,7 +100,9 @@ export default function Shop() {
                 <h2 className={styles.title}>Books</h2>
                 <p className={styles.numberOfresult}>{filterBooks?.length > 0 ? filterBooks.length : '0'} results</p>
                 { filterBooks?.length > 0 
-                ? <BooksContainer books={filterBooks} handleAddToCartClick={handleAddToCartClick}/>
+                ? <BooksContainer books={filterBooks} 
+                handleShowToast={handleShowToast}
+                handleAddToCartClick={handleAddToCartClick}/>
                 : 'No books found'}
             </div>
             <ShopSide setPriceInterval={setPriceInterval} setCategorie={setCategorie} parentCategories={categorie}/>

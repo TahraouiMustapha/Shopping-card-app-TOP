@@ -1,7 +1,7 @@
 import styles from "./Card.module.css"
 
 
-export default function Card({book, handleAddToCartClick}) {
+export default function Card({book, handleAddToCartClick, handleShowToast}) {
     const thumbnailStyle = {
         backgroundImage: book?.thumbnail ? `url(${book.thumbnail})`: 'none',
         textAlign: 'center',
@@ -23,7 +23,10 @@ export default function Card({book, handleAddToCartClick}) {
                 </div>
                 <div>
                     <p className={styles.price}>{book?.price}$</p>
-                    <button onClick={()=> handleAddToCartClick(book)}
+                    <button onClick={()=> {
+                        handleShowToast()
+                        handleAddToCartClick(book)
+                    }}
                     className={styles.addToCartBtn}>Add To Cart</button>
                 </div>
             </div>

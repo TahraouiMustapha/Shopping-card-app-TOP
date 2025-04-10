@@ -5,7 +5,7 @@ import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 
 
-export default function Slide({books, handleAddToCartClick}) {
+export default function Slide({books, handleAddToCartClick, handleShowToast}) {
     const [shownIndex, setShownIndex] = useState([
         0, 1, 2, 3, 4
     ])
@@ -28,7 +28,10 @@ export default function Slide({books, handleAddToCartClick}) {
             <ChevronLeft className={styles.arrow}
             onClick={handleLiftClick} size={32} strokeWidth={1.5}/>
             <div className={styles.cardsContainer}>
-                {shownIndex.map((shown)=> <Card key={books[shown].id} book={books[shown]} handleAddToCartClick={handleAddToCartClick}/>)}
+                {shownIndex.map((shown)=> <Card key={books[shown].id} 
+                book={books[shown]} 
+                handleShowToast={handleShowToast}
+                handleAddToCartClick={handleAddToCartClick}/>)}
             </div>
             <ChevronRight className={styles.arrow}
             onClick={handleRightClick} size={32} strokeWidth={1.5}/>

@@ -22,7 +22,7 @@ function Home(){
     const { trendingBooks, trendingError, trendingLoading } = useTrendingBooks();
     const { bestSellerBooks, bestSellerError, bestSellerLoading } = useBestSellerBooks()
     const navigate = useNavigate();
-    const { setCategorie, setCartBooksState } = useOutletContext()
+    const { setCategorie, setCartBooksState, setIsVisible } = useOutletContext()
     
 
     function handleCategorieClick(categorieName) {
@@ -61,6 +61,10 @@ function Home(){
                 size: size
             } 
         })
+    }
+
+    function handleShowToast() {
+        setIsVisible(true)
     }
 
     return (
@@ -103,7 +107,9 @@ function Home(){
                     <Loader width={56} height={56}
                     className={indexStyle.loaderSpinner}/>
                 ): (
-                    trendingBooks?.length > 0 && <Slide books={trendingBooks} handleAddToCartClick={handleAddToCartClick}/> 
+                    trendingBooks?.length > 0 && <Slide books={trendingBooks} 
+                    handleShowToast={handleShowToast}
+                    handleAddToCartClick={handleAddToCartClick}/> 
                 )}
             </div>
 
@@ -119,7 +125,9 @@ function Home(){
                 ): bestSellerLoading ? (
                     <Loader width={56} height={56}
                     className={indexStyle.loaderSpinner}/>
-                ): bestSellerBooks?.length > 0 && <Slide books={bestSellerBooks} handleAddToCartClick={handleAddToCartClick}/>}
+                ): bestSellerBooks?.length > 0 && <Slide books={bestSellerBooks} 
+                                                    handleShowToast={handleShowToast}
+                                                handleAddToCartClick={handleAddToCartClick}/>}
             </div>
         </div>
     )

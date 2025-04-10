@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Outlet } from "react-router-dom" 
 import NavigationBar from "./components/navigationBar/NavigationBar"
+import Toast from "./components/toast/Toast"
 
 export default function App() {
     const [categorie, setCategorie] = useState([])
@@ -9,6 +10,7 @@ export default function App() {
       books: new Map(),
       size: 0
     })
+    const [isVisible, setIsVisible] = useState(false)
 
     return (
       <>
@@ -19,10 +21,12 @@ export default function App() {
               categorie, 
               setCategorie,
               cartBooksState, 
-              setCartBooksState
+              setCartBooksState,
+              setIsVisible
             }
             }/>
         </div>
+        {isVisible && <Toast  setIsVisible={setIsVisible}/>}
       </>
     )
   }
