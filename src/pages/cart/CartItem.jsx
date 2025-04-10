@@ -1,3 +1,4 @@
+import Quantity from "../../components/quantity/Quantity";
 import styles from "./Cart.module.css"
 
 // cartBooksState.books object structure {key, value} => {key: book.id, value : { bookObj: book, quantity: 1}
@@ -27,15 +28,9 @@ export default function CartItem({item, changeQuantityInItemsArray, deleteItem})
                 </div>
             </div>
             <p>${Number(item.bookObj.price).toFixed(2)}</p>
-            <div className={styles.quantity}>
-                <button
-                data-id = {item.bookObj.id}
-                onClick={handleSubstractQuantity}>-</button>
-                <p>{item.quantity}</p>
-                <button 
-                data-id = {item.bookObj.id}
-                onClick={handleAddQuantity}>+</button>
-            </div>
+            <Quantity item={item} 
+            handleAddQuantity={handleAddQuantity}
+            handleSubstractQuantity={handleSubstractQuantity}/>
 
             <p>${itemTotal.toFixed(2)}</p>
 
