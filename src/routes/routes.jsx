@@ -2,6 +2,7 @@ import App from "../App";
 import Home from "../pages/home/Home"
 import Shop from "../pages/shop/Shop"
 import Cart from "../pages/cart/Cart";
+import Book from "../pages/book/Book";
 
 const routes = [
     {
@@ -10,7 +11,8 @@ const routes = [
       children: [
         { path: "/", element: <Home/> },
         { path: "/shop", element: <Shop/>},
-        { path: "/cart", element: <Cart/> }
+        { path: "/cart", element: <Cart/> },
+        { path:"/book/:bookId", element: <Book/>}
       ]
     }
 ]

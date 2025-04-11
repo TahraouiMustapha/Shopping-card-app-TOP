@@ -1,15 +1,26 @@
 import styles from "./Card.module.css"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Card({book, handleAddToCartClick, handleShowToast}) {
+    const navigate = useNavigate();
+
     const thumbnailStyle = {
         backgroundImage: book?.thumbnail ? `url(${book.thumbnail})`: 'none',
         textAlign: 'center',
         color: '#666'
     }
 
+    function handleGoingToBookPage(book) {
+        navigate(`/book/${book.id}`, {
+            state: { book }
+        });
+    }
+
+
     return (
-        <div className={styles.card}>
+        <div onClick={() => handleGoingToBookPage(book)} 
+        className={styles.card}>
             <div 
             className={styles.thumbnail}
             style={thumbnailStyle}>
@@ -23,7 +34,8 @@ export default function Card({book, handleAddToCartClick, handleShowToast}) {
                 </div>
                 <div>
                     <p className={styles.price}>{book?.price}$</p>
-                    <button onClick={()=> {
+                    <button onClick={(e)=> {
+                        e.stopPropagation();
                         handleShowToast()
                         handleAddToCartClick(book)
                     }}
