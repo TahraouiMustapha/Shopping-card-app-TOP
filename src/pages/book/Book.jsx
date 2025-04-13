@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams, useOutletContext } from "react-router-dom"
+import { useLocation, useParams, useOutletContext, useNavigate } from "react-router-dom"
 import createBook from "../../utils/bookFactory";
 import { BaseQuantity, Quantity } from "../../components/quantity/Quantity";
 import styles from "./Book.module.css"
@@ -9,6 +9,7 @@ import { ShoppingCart } from "lucide-react";
 export default function Book() {
     const { bookId } = useParams();
     const { state } = useLocation();
+    const navigate = useNavigate();
     const { cartBooksState, setCartBooksState, setIsVisible } = useOutletContext() 
     
 
@@ -110,6 +111,13 @@ export default function Book() {
                         className={styles.addToCartBtn}>
                             <ShoppingCart />
                             Add To Cart
+                        </button>
+
+                        <button onClick={()=> {
+                            handleToCart(book)
+                            navigate('/cart');
+                        }}>
+                            Buy Now
                         </button>
                     </div>
                 </div>
