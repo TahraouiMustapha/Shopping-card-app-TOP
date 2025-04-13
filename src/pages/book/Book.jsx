@@ -9,7 +9,7 @@ import { ShoppingCart } from "lucide-react";
 export default function Book() {
     const { bookId } = useParams();
     const { state } = useLocation();
-    const { cartBooksState, setCartBooksState } = useOutletContext() 
+    const { cartBooksState, setCartBooksState, setIsVisible } = useOutletContext() 
     
 
     const [book, setBook] = useState(state?.book || null)
@@ -82,6 +82,10 @@ export default function Book() {
         })
     }
 
+    function handleShowToast() {
+        setIsVisible(true)
+    }
+
 
     return (
         <div className={styles.content}>
@@ -99,7 +103,10 @@ export default function Book() {
                     bookQuantity={bookQuantity} 
                     setBookQuantity={setBookQuantity}/>
                     <div className={styles.btns}>
-                        <button onClick={()=> handleToCart(book)} 
+                        <button onClick={()=> {
+                            handleToCart(book)
+                            handleShowToast()
+                        }} 
                         className={styles.addToCartBtn}>
                             <ShoppingCart />
                             Add To Cart
