@@ -1,4 +1,4 @@
-import Quantity from "../../components/quantity/Quantity";
+import { Quantity } from "../../components/quantity/Quantity";
 import styles from "./Cart.module.css"
 
 // cartBooksState.books object structure {key, value} => {key: book.id, value : { bookObj: book, quantity: 1}

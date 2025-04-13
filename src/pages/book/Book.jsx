@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom"
 import createBook from "../../utils/bookFactory";
+import { BaseQuantity } from "../../components/quantity/Quantity";
+import styles from "./Book.module.css"
+
 
 export default function Book() {
     const { bookId } = useParams();
@@ -9,6 +12,8 @@ export default function Book() {
     const [book, setBook] = useState(state?.book || null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(!state?.book)
+
+    const [bookQuantity, setBookQuantity] = useState(1);
     
 
     useEffect(()=> {
@@ -52,9 +57,14 @@ export default function Book() {
     if(error) return <p>{error}</p>
     if(loading) return <p>Loading ...</p>
 
-    console.log(book)
+    console.log('render')
 
     return (
-        <p>{book.title}</p>
+        <div className={styles.content}>
+            <p>{book.title}</p>
+            <BaseQuantity 
+            bookQuantity={bookQuantity} 
+            setBookQuantity={setBookQuantity}/>
+        </div>
     )
 }

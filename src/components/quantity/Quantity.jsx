@@ -1,6 +1,7 @@
+import { useDebugValue, useEffect } from "react";
 import styles from "./Quantity.module.css"
 
-export default function Quantity({item, handleAddQuantity, handleSubstractQuantity}) {
+function Quantity({item, handleAddQuantity, handleSubstractQuantity}) {
     return (
         <div className={styles.quantity}>
             <button
@@ -13,3 +14,26 @@ export default function Quantity({item, handleAddQuantity, handleSubstractQuanti
         </div>
     )
 }
+
+function BaseQuantity({ bookQuantity, setBookQuantity }) {
+
+    function handleAddQuantity() {
+        setBookQuantity((prevQuantity)=> prevQuantity + 1);
+    }
+
+    function handleSubstractQuantity() {
+        setBookQuantity((prevQuantity)=> prevQuantity <= 0 ? 0 : prevQuantity - 1);
+    }
+
+    return (
+        <div className={styles.quantity}>
+            <button
+            onClick={handleSubstractQuantity}>-</button>
+            <p>{bookQuantity}</p>
+            <button 
+            onClick={handleAddQuantity}>+</button>
+        </div>
+    )
+}
+
+export { Quantity, BaseQuantity };
