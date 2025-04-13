@@ -9,7 +9,7 @@ import { ShoppingCart } from "lucide-react";
 export default function Book() {
     const { bookId } = useParams();
     const { state } = useLocation();
-    const { setCartBooksState } = useOutletContext() 
+    const { cartBooksState, setCartBooksState } = useOutletContext() 
     
 
     const [book, setBook] = useState(state?.book || null)
@@ -49,12 +49,16 @@ export default function Book() {
         if(!state?.book) {
             fetchSingelBook();
         } else {
-            setLoading(false)
+            setLoading(false);
+            const newQuantity = cartBooksState.books.has(bookId) 
+            ?  cartBooksState.books.get(bookId).quantity
+            : 1;
+            setBookQuantity(newQuantity)
             return;
         }
 
 
-    }, [bookId, state?.book])
+    }, [bookId, state?.book, cartBooksState.books])
 
 
     if(error) return <p>{error}</p>

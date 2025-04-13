@@ -49,14 +49,12 @@ export default function Shop() {
     function handleAddToCartClick(book) {
         setCartBooksState((prevBooksState)=> {
             let newMap = new Map(prevBooksState.books);      
-            let size = prevBooksState.size;   
 
             if(!newMap.has(book.id)) {
                 newMap.set(book.id, {
                     bookObj: book,
                     quantity: 1
                 })
-                size += 1
             } else {
                 const oldObj = newMap.get(book.id);
                 newMap.set(book.id, {
@@ -64,9 +62,10 @@ export default function Shop() {
                     quantity: oldObj.quantity + 1 
                 })
             }
+            
             return {
-                books:newMap,
-                size: size
+                books: newMap,
+                size: newMap.size
             } 
         })
     }
