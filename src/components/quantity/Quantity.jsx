@@ -1,4 +1,3 @@
-import { useDebugValue, useEffect } from "react";
 import styles from "./Quantity.module.css"
 
 function Quantity({item, handleAddQuantity, handleSubstractQuantity}) {

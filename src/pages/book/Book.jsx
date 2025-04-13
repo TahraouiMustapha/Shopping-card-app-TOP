@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useParams, useOutletContext } from "react-router-dom"
 import createBook from "../../utils/bookFactory";
-import { BaseQuantity } from "../../components/quantity/Quantity";
+import { BaseQuantity, Quantity } from "../../components/quantity/Quantity";
 import styles from "./Book.module.css"
 
+import { ShoppingCart } from "lucide-react";
 
 export default function Book() {
     const { bookId } = useParams();
     const { state } = useLocation();
+    const { setCartBooksState } = useOutletContext() 
+    
 
     const [book, setBook] = useState(state?.book || null)
     const [error, setError] = useState(null)
@@ -57,14 +60,50 @@ export default function Book() {
     if(error) return <p>{error}</p>
     if(loading) return <p>Loading ...</p>
 
-    console.log('render')
+
+
+    function handleToCart(book) {
+        setCartBooksState((prevState)=> {
+            const myMap = new Map(prevState.books);
+
+            myMap.set(book.id, {
+                bookObj: book,
+                quantity: bookQuantity
+            })
+            
+            return  {
+                books: myMap, 
+                size: myMap.size
+            }
+        })
+    }
+
 
     return (
         <div className={styles.content}>
-            <p>{book.title}</p>
-            <BaseQuantity 
-            bookQuantity={bookQuantity} 
-            setBookQuantity={setBookQuantity}/>
+            <div className={styles.thumbnail}>thumbo</div>
+            <div className={styles.infoContainer}>
+                <div>
+                    <h1 className={styles.title}>title</h1>
+                    <p className={styles.author}> author </p> 
+                    <p className={styles.categorie}>cat</p>  
+                </div>
+
+                <div>
+                    <p className={styles.price}>18.3</p>
+                    <BaseQuantity 
+                    bookQuantity={bookQuantity} 
+                    setBookQuantity={setBookQuantity}/>
+                    <div className={styles.btns}>
+                        <button onClick={()=> handleToCart(book)} 
+                        className={styles.addToCartBtn}>
+                            <ShoppingCart />
+                            Add To Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     )
 }

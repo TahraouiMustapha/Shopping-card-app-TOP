@@ -3,6 +3,18 @@ import CartItem from "./CartItem";
 import styles from "./Cart.module.css"
 
 
+/*
+    my state sturcture
+    cartBooksState = {
+        books: Map(),
+        size: number
+    }
+    cartBooksState.books object = {key : book.id, value : {
+        bookObj: book, 
+        quantity: number
+    }}
+*/
+
 function calculateSubtotal(itemsArray) {
     let total = 0 ;
     for(let item of itemsArray ) {
@@ -13,8 +25,6 @@ function calculateSubtotal(itemsArray) {
 
 export default function Cart() {
     const { cartBooksState, setCartBooksState } = useOutletContext() 
-    // cartBooksState = {books: new Map(),size: 0}
-    // cartBooksState.books obj {key, value} = {key: book.id, value : { bookObj: book, quantity: 1}
     const myItems = Array.from(cartBooksState.books);
 
     function changeQuantityInItemsArray(id, newQuantity) {
