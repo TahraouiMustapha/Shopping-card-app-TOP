@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { Quantity } from "../../components/quantity/Quantity";
 import styles from "./Cart.module.css"
 
 // cartBooksState.books object structure {key, value} => {key: book.id, value : { bookObj: book, quantity: 1}
 
 export default function CartItem({item, changeQuantityInItemsArray, deleteItem}) {
+    const navigate = useNavigate();
     const itemTotal = item.quantity * item.bookObj.price; 
 
     function handleAddQuantity(e) {
@@ -18,10 +20,17 @@ export default function CartItem({item, changeQuantityInItemsArray, deleteItem})
         changeQuantityInItemsArray(id, newQuantity);
     }
 
+    function handleGoingToBookPage(book) {
+        navigate(`/book/${book.id}`, {
+            state: book
+        })
+    }
+
     return (
         <div className={styles.cartItem}> 
             <div>
-                <div className={styles.thumbnail}
+                <div onClick={()=> handleGoingToBookPage(item.bookObj)}
+                className={styles.thumbnail}
                 style={{backgroundImage: `url(${item.bookObj.thumbnail})`}}></div>
                 <div className={styles.bookTitle}>
                     {item.bookObj.title} 

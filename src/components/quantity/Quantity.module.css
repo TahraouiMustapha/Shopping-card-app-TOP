@@ -3,6 +3,7 @@
     width: 140px;
     display: flex;
     height: 48px;
+    font-weight: 600;
 
     border: 0.8px solid var(--placeholder-color);
 }

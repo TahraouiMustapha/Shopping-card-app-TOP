@@ -87,38 +87,41 @@ export default function Book() {
         setIsVisible(true)
     }
 
-
     return (
+        
         <div className={styles.content}>
-            <div className={styles.thumbnail}>thumbo</div>
-            <div className={styles.infoContainer}>
-                <div>
-                    <h1 className={styles.title}>title</h1>
-                    <p className={styles.author}> author </p> 
-                    <p className={styles.categorie}>cat</p>  
-                </div>
-
-                <div>
-                    <p className={styles.price}>18.3</p>
-                    <BaseQuantity 
-                    bookQuantity={bookQuantity} 
-                    setBookQuantity={setBookQuantity}/>
-                    <div className={styles.btns}>
-                        <button onClick={()=> {
-                            handleToCart(book)
-                            handleShowToast()
-                        }} 
-                        className={styles.addToCartBtn}>
-                            <ShoppingCart />
-                            Add To Cart
-                        </button>
-
-                        <button onClick={()=> {
-                            handleToCart(book)
-                            navigate('/cart');
-                        }}>
-                            Buy Now
-                        </button>
+            <div className={styles.bookCard}>
+                <div style={{
+                    backgroundImage: `url(${book.thumbnail})`,
+                }}
+                className={styles.thumbnail}></div>
+                <div className={styles.infoContainer}>
+                    <div>
+                        <h1 className={styles.title}>{book.title}</h1>
+                        <p className={styles.author}> {book.author ??'No auhtors'} </p>
+                    </div>
+                    <div>
+                        <p className={styles.price}>${book.price}</p>
+                        <BaseQuantity
+                        bookQuantity={bookQuantity}
+                        setBookQuantity={setBookQuantity}/>
+                        <div className={styles.btns}>
+                            <button onClick={()=> {
+                                handleToCart(book)
+                                handleShowToast()
+                            }}
+                            className={styles.addToCartBtn}>
+                                <ShoppingCart />
+                                Add To Cart
+                            </button>
+                            <button onClick={()=> {
+                                handleToCart(book)
+                                navigate('/cart');
+                            }}
+                            className={styles.buyNowBtn}>
+                                Buy Now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@ body {
 
 /* who include pages */
 .content-container {
-  flex: 1;
+  flex-grow: 1;
 }
 
 
