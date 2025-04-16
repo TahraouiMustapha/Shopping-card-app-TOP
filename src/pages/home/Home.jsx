@@ -8,8 +8,9 @@ import selfHelpImg from "../../assets/images/self-help_category.png"
 import historyImg from "../../assets/images/history_category.png"
 import fictionImg from "../../assets/images/fiction_category.png"
 import businessImg from "../../assets/images/business_categorie.jpg"
-import { Loader } from "lucide-react";
+import { Loader, Proportions } from "lucide-react";
 
+import PropTypes from "prop-types";
 
 const categories = [{id: crypto.randomUUID(), categorieName:'Self-help', categorieImage: selfHelpImg},
                     {id: crypto.randomUUID(), categorieName:'History', categorieImage: historyImg},
@@ -146,5 +147,11 @@ function CategorieCard({categorieName, categorieImage, handleCategorieClick}) {
         </div>
     )
 }
+
+CategorieCard.proTypes = {
+    categorieName: PropTypes.string.isRequired,
+    handleCategorieClick: PropTypes.func
+}
+
 
 export default Home;
