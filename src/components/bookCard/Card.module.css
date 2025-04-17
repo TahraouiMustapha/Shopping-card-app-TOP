@@ -6,8 +6,8 @@
 .card {
     --blue-color: #3B82F6;
     --background-color: #eaebec;
-    height: 480px;
-    flex: 0 0 250px;
+    height: 460px;
+    flex: 0 0 225px;
 
     display: flex;
     flex-direction: column;

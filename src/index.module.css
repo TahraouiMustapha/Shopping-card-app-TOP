@@ -5,15 +5,9 @@
   url('./assets/fonts/Roboto-Italic-VariableFont_wdthwght.ttf') format('truetype');
 }
 
-html {
-  font-size: 16px;
-}
-
 :root {
   --logo-color: #78350F;
   font-family: 'RobotoFont', system-ui ;
-  line-height: 1.5;
-  font-weight: 400;
 }
 
 body {
@@ -22,13 +16,6 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 
@@ -61,7 +48,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  align-self: flex-end;
+  justify-self: flex-end;
 
   font-size: 1.1em;
   font-weight:600 ;
