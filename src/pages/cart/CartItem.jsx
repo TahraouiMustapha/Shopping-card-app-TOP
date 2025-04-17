@@ -31,7 +31,8 @@ export default function CartItem({item, changeQuantityInItemsArray, deleteItem})
             <div>
                 <div onClick={()=> handleGoingToBookPage(item.bookObj)}
                 className={styles.thumbnail}
-                style={{backgroundImage: `url(${item.bookObj.thumbnail})`}}></div>
+                style={{backgroundImage: `url(${item.bookObj.thumbnail})`, 
+                cursor: 'pointer'}}></div>
                 <div className={styles.bookTitle}>
                     {item.bookObj.title} 
                 </div>
