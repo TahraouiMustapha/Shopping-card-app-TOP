@@ -5,6 +5,10 @@
   url('./assets/fonts/Roboto-Italic-VariableFont_wdthwght.ttf') format('truetype');
 }
 
+html {
+  font-size: 16px;
+}
+
 :root {
   --logo-color: #78350F;
   font-family: 'RobotoFont', system-ui ;
